@@ -1,0 +1,68 @@
+import java.util.Scanner;
+public class SistemaCompleto {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        do {
+            System.out.println("\n=== MENU ===");
+            System.out.println("1 - Sistema Escolar");
+            System.out.println("2 - Conversor de Temperatura");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            switch (opcao) {
+                case 1:
+                    sistemaEscolar(scanner);
+                    break;
+                case 2:
+                    conversorTemperatura(scanner);
+                    break;
+                case 0:
+                    System.out.println("Encerrando o programa...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        } while (opcao != 0);
+        scanner.close();
+    }
+    public static void sistemaEscolar(Scanner scanner) {
+        double[] notas = new double[8];
+        // Receber as notas do aluno
+        System.out.println("\nDigite as 8 notas anuais:");
+        for (int i = 0; i < 8; i++) {
+            System.out.print((i + 1) + "ª nota: ");
+            notas[i] = scanner.nextDouble();
+        }
+        // Calcular médias bimestrais
+        double[] mediasBimestrais = new double[4];
+        for (int i = 0; i < 4; i++) {
+            mediasBimestrais[i] = (notas[i * 2] + notas[i * 2 + 1]) / 2;
+        }
+        // Calcular médias semestrais
+        double[] mediasSemestrais = new double[2];
+        mediasSemestrais[0] = (mediasBimestrais[0] + mediasBimestrais[1]) / 2;
+        mediasSemestrais[1] = (mediasBimestrais[2] + mediasBimestrais[3]) / 2;
+        // Calcular média final
+        double mediaFinal = (mediasSemestrais[0] + mediasSemestrais[1]) / 2;
+        // Exibir resultados
+        System.out.println("\n--- Resultados do Sistema Escolar ---");
+        for (int i = 0; i < 4; i++) {
+            System.out.println((i + 1) + "º Bimestre: " + mediasBimestrais[i]);
+        }
+        System.out.println("1º Semestre: " + mediasSemestrais[0]);
+        System.out.println("2º Semestre: " + mediasSemestrais[1]);
+        System.out.println("Média Final: " + mediaFinal);
+    }
+    public static void conversorTemperatura(Scanner scanner) {
+        System.out.print("\nDigite a temperatura em Celsius: ");
+        double celsius = scanner.nextDouble();
+        double fahrenheit = (celsius * 9 / 5) + 32;
+        double kelvin = celsius + 273.15;
+        // Exibir os resultados
+        System.out.println("\n--- Conversão de Temperatura ---");
+        System.out.println("Celsius: " + celsius + "°C");
+        System.out.println("Fahrenheit: " + fahrenheit + "°F");
+        System.out.println("Kelvin: " + kelvin + "K");
+    }
+}
